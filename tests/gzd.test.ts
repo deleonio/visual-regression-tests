@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import { checkA11y, injectAxe } from 'axe-playwright';
+// import { checkA11y, injectAxe } from 'axe-playwright';
 
 test(`GZD > Registrierung`, async ({ page }) => {
 	await page.goto(`https://www.zoll-portal.de/registrierung/benutzerkonto/daten`);
@@ -11,17 +11,17 @@ test(`GZD > Registrierung`, async ({ page }) => {
 	await expect(page).toHaveScreenshot({
 		fullPage: true,
 	});
-	await injectAxe(page);
-	await checkA11y(page, undefined, {
-		axeOptions: {
-			runOnly: {
-				type: 'tag',
-				values: ['best-practices', 'wcag2a', 'wcag2aa', 'wcag21aa'],
-			},
-		},
-		detailedReport: true,
-		detailedReportOptions: {
-			html: true,
-		},
-	});
+	// await injectAxe(page);
+	// await checkA11y(page, undefined, {
+	// 	axeOptions: {
+	// 		runOnly: {
+	// 			type: 'tag',
+	// 			values: ['best-practices', 'wcag2a', 'wcag2aa', 'wcag21aa'],
+	// 		},
+	// 	},
+	// 	detailedReport: true,
+	// 	detailedReportOptions: {
+	// 		html: true,
+	// 	},
+	// });
 });

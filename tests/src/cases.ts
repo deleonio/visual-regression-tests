@@ -1,11 +1,4 @@
-import { expect, test } from '@playwright/test';
-// import { checkA11y, injectAxe } from 'axe-playwright';
-
-// https://www.npmjs.com/package/@axe-core/playwright
-// https://github.com/abhinaba-ghosh/axe-playwright
-// https://playwrightsolutions.com/is-it-possible-to-use-playwright-to-do-accessibility-testing/
-
-const TEST_CASES = new Map<string, Set<string>>();
+export const TEST_CASES = new Map<string, Set<string>>();
 TEST_CASES.set('abbr', new Set(['basic']));
 TEST_CASES.set('accordion', new Set(['basic', 'header', 'headlines']));
 TEST_CASES.set('alert', new Set(['basic', 'card-msg', 'html']));
@@ -43,56 +36,3 @@ TEST_CASES.set('textarea', new Set(['basic', 'adjust-height', 'disabled', 'place
 // TEST_CASES.set('toast', new Set(['basic']));
 TEST_CASES.set('tooltip', new Set(['basic']));
 TEST_CASES.set('version', new Set(['basic', 'context']));
-
-const THEME_CASES = new Set(['bmf', 'desy', 'mapz', 'th', 'zoll']);
-
-THEME_CASES.forEach((themeName) => {
-	TEST_CASES.forEach((value, componentName) => {
-		value.forEach((testName) => {
-			test(`${themeName}: ${componentName} > ${testName}`, async ({ page }) => {
-				await page.goto(`https://w5u37c.csb.app/#/${componentName}/${testName}?theme=${themeName}`);
-				await page.waitForSelector('body');
-				await page.waitForSelector(`kol-${componentName}`);
-				// await page.waitForTimeout(1000);
-				await expect(page).toHaveScreenshot({
-					fullPage: true,
-				});
-				// await injectAxe(page);
-				// await checkA11y(page, undefined, {
-				// 	axeOptions: {
-				// 		runOnly: {
-				// 			type: 'tag',
-				// 			values: ['best-practices', 'wcag2a', 'wcag2aa', 'wcag21aa'],
-				// 		},
-				// 	},
-				// 	detailedReport: true,
-				// 	detailedReportOptions: {
-				// 		html: true,
-				// 	},
-				// });
-			});
-		});
-	});
-});
-
-// test('Visit home page and run an axe test @axe', async ({ page }, testInfo) => {
-// 	await page.goto('https://broken-workshop.dequelabs.com/');
-
-// 	//Analyze the page with axe
-// 	const accessibilityScanResults = await new AxeBuilder({ page }).analyze();
-
-// 	//Attached the violations to the test report
-// 	await testInfo.attach('accessibility-scan-results', {
-// 		body: JSON.stringify(accessibilityScanResults.violations, null, 2),
-// 		contentType: 'application/json',
-// 	});
-
-// 	//Console log the violations
-// 	const violation = accessibilityScanResults.violations;
-// 	violation.forEach(function (entry) {
-// 		console.log(`${entry.impact as string} ${entry.description}`);
-// 	});
-
-// 	//Expect violations to be empty
-// 	// expect(accessibilityScanResults.violations).toEqual([]);
-// });
