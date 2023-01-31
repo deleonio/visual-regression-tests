@@ -33,7 +33,7 @@ jobs:
       - name: Install
         run: pnpm i
       - name: Test
-        run: npx playwright test
+        run: npx playwright test --update-snapshots
 
       - name: Commit changed files
         run: |
@@ -42,6 +42,9 @@ jobs:
           git add --force test-results
           git status
           git commit -m "chore: store test-results"
+          git add --force tests
+          git status
+          git commit -m "chore: store updated snapshots"
 
       - uses: ad-m/github-push-action@master
         with:
