@@ -34,3 +34,15 @@ jobs:
         run: pnpm i
       - name: Test
         run: npx playwright test
+
+      - name: Commit changed files
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add --force test-results
+          git status
+          git commit -m "chore: store test-results"
+
+      - uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
