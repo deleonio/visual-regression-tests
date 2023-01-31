@@ -8,7 +8,8 @@ import { expect, test } from '@playwright/test';
 export const createTest = (themeName, componentName, testName) => {
 	test(`${themeName}: ${componentName} > ${testName}`, async ({ page }) => {
 		await page.goto(`https://w5u37c.csb.app/#/${componentName}/${testName}?theme=${themeName}`);
-		await page.waitForSelector('body');
+		await page.waitForSelector(`body`);
+		await page.waitForSelector(`kol-${componentName}`);
 		await page.waitForTimeout(1000);
 		await expect(page).toHaveScreenshot({
 			fullPage: true,
