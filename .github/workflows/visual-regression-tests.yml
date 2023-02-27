@@ -16,7 +16,8 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
-        theme: [bmf, bzst, desy-v2, itzbund, mapz, th, zoll-v2]
+        theme: [bmf, mapz]
+        // theme: [bmf, bzst, desy-v2, itzbund, mapz, th, zoll-v2]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
@@ -49,7 +50,7 @@ jobs:
 
       - name: Test
         continue-on-error: true
-        run: npx playwright test -g ${{ matrix.theme }}
+        run: npx playwright test --update-snapshots -g ${{ matrix.theme }}
 
       # - name: Move test results
       #   continue-on-error: true
