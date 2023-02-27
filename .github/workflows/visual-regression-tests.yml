@@ -17,7 +17,7 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
         theme: [bmf, mapz]
-        // theme: [bmf, bzst, desy-v2, itzbund, mapz, th, zoll-v2]
+        # theme: [bmf, bzst, desy-v2, itzbund, mapz, th, zoll-v2]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
