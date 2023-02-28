@@ -1,0 +1,88 @@
+name: GitHub follower tests
+
+on:
+  schedule:
+    - cron: '0 4 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  test-github:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - uses: pnpm/action-setup@v2
+        id: pnpm-install
+        with:
+          version: 7
+          run_install: false
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        shell: bash
+        run: echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+      # - uses: actions/cache@v3
+      #   with:
+      #     path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+      #     key: ${{ runner.os }}-pnpm-store
+      #     restore-keys: ${{ runner.os }}-pnpm-store
+
+      - name: Install
+        run: pnpm i
+
+      - name: Test
+        run: npx playwright test --update-snapshots -g GitHub
+
+      - name: Git config
+        run: |
+          git config --local user.email "github@martinoppitz.com"
+          git config --local user.name "Martin Oppitz"
+          # git config pull.ff only
+          # git config pull.rebase true
+          git config pull.rebase false
+
+      - name: Commit changed test snapshots
+        continue-on-error: true
+        run: |
+          git add --force tests/**/*GitHub*
+          git status
+          git commit -m "chore: store updated test snapshots - GitHub"
+
+      - uses: 1itachi/sleep-random@v1.0.0
+        with:
+          minutes: '1'
+          random: 'true'
+
+      - name: Git pull
+        run: git pull
+
+      - uses: ad-m/github-push-action@master
+        continue-on-error: true
+        with:
+          github_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          branch: ${{ github.ref }}
+
+      - uses: 1itachi/sleep-random@v1.0.0
+        with:
+          minutes: '1'
+          random: 'true'
+
+      - name: Git pull
+        run: git pull
+
+      - uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          branch: ${{ github.ref }}
