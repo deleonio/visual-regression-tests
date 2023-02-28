@@ -51,12 +51,12 @@ jobs:
       - name: Test
         run: npx playwright test -g ${{ matrix.theme }}
 
-      # - name: Move test results
-      #   continue-on-error: true
-      #   run: |
-      #     mkdir test-results-
-      #     mv test-results test-results-/${{ matrix.os }}
-      #     mv test-results- test-results
+      - name: Move test results
+        continue-on-error: true
+        run: |
+          mkdir test-results-
+          mv test-results test-results-/${{ matrix.os }}
+          mv test-results- test-results
 
       - name: Git config
         run: |
@@ -66,12 +66,12 @@ jobs:
           # git config pull.rebase true
           git config pull.rebase false
 
-      # - name: Commit changed test results
-      #   continue-on-error: true
-      #   run: |
-      #     git add --force test-results/${{ matrix.os }}/**/*${{ matrix.theme }}*
-      #     git status
-      #     git commit -m "chore: store test results - ${{ matrix.os }} ${{ matrix.theme }}"
+      - name: Commit changed test results
+        continue-on-error: true
+        run: |
+          git add --force test-results/${{ matrix.os }}/**/*${{ matrix.theme }}*
+          git status
+          git commit -m "chore: store test results - ${{ matrix.os }} ${{ matrix.theme }}"
 
       - name: Commit changed test snapshots
         continue-on-error: true
