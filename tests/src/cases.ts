@@ -10,6 +10,7 @@ TEST_CASES.set('button-link', new Set(['basic', 'icons', 'image', 'target']));
 TEST_CASES.set('card', new Set(['basic', 'confirm', 'flex', 'selection']));
 TEST_CASES.set('details', new Set(['basic']));
 // TEST_CASES.set('form', new Set(['basic']));
+TEST_CASES.set('handout', new Set(['basic']));
 TEST_CASES.set('heading', new Set(['basic', 'badged', 'paragraph']));
 TEST_CASES.set('icon', new Set(['basic']));
 TEST_CASES.set('indented-text', new Set(['basic']));
