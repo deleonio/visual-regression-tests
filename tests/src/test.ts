@@ -9,7 +9,7 @@ export const createTest = (title: string, url: string) => {
 	test(title, async ({ page }) => {
 		await page.goto(url);
 		await page.waitForSelector(`body`);
-		await page.waitForTimeout(500);
+		await page.waitForTimeout(2000);
 		await expect(page).toHaveScreenshot({
 			fullPage: true,
 		});
