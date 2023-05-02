@@ -21,7 +21,7 @@ jobs:
         # theme: [bamf, bmf, bpa, bzst, desy-v1, desy-v2, ecl-ec, ecl-eu, itzbund, mapz, th, zoll-v2]
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           persist-credentials: false
           fetch-depth: 0
