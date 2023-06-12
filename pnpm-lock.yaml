@@ -8,8 +8,8 @@ devDependencies:
     specifier: 1.33.0
     version: 1.33.0
   '@types/node':
-    specifier: 18.16.3
-    version: 18.16.3
+    specifier: 20.3.0
+    version: 20.3.0
   '@typescript-eslint/eslint-plugin':
     specifier: 5.59.1
     version: 5.59.1(@typescript-eslint/parser@5.59.1)(eslint@8.39.0)(typescript@5.0.4)
@@ -219,7 +219,7 @@ packages:
     engines: {node: '>=14'}
     hasBin: true
     dependencies:
-      '@types/node': 18.16.3
+      '@types/node': 20.3.0
       playwright-core: 1.33.0
     optionalDependencies:
       fsevents: 2.3.2
@@ -265,8 +265,8 @@ packages:
     resolution: {integrity: sha512-wOuvG1SN4Us4rez+tylwwwCV1psiNVOkJeM3AUWUNWg/jDQY2+HE/444y5gc+jBmRqASOm2Oeh5c1axHobwRKQ==}
     dev: true
 
-  /@types/node@18.16.3:
-    resolution: {integrity: sha512-OPs5WnnT1xkCBiuQrZA4+YAV4HEJejmHneyraIaxsbev5yCEr6KMwINNFP9wQeFIw8FWcoTqF3vQsa5CDaI+8Q==}
+  /@types/node@20.3.0:
+    resolution: {integrity: sha512-cumHmIAf6On83X7yP+LrsEyUOf/YlociZelmpRYaGFydoaPdxdt80MAbu6vWerQT2COCp2nPvHdsbD7tHn/YlQ==}
     dev: true
 
   /@types/semver@7.3.13:
